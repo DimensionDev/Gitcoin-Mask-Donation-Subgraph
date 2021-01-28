@@ -1,0 +1,17 @@
+[
+  {
+    "constant": false,
+    "inputs": [
+      { "name": "toFirst", "type": "address" },
+      { "name": "toSecond", "type": "address" },
+      { "name": "valueFirst", "type": "uint256" },
+      { "name": "valueSecond", "type": "uint256" },
+      { "name": "tokenAddress", "type": "address" }
+    ],
+    "name": "splitTransfer",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

@@ -1,0 +1,22 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Splitter
+    network: mainnet
+    source:
+      address: "0xdf869FAD6dB91f437B59F1EdEFab319493D4C4cE"
+      abi: Splitter
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      entities:
+
+      abis:
+        - name: Splitter
+          file: ./abis/Splitter.json
+      eventHandlers:
+
+      file: ./src/mapping.ts
