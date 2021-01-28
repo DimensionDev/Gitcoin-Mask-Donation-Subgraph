@@ -8,11 +8,16 @@ type Token @entity {
   chain_id: Int!
 }
 
+type Donor @entity {
+  id: ID!
+  address: Bytes!
+}
+
 type Donation @entity {
   id: ID!
   token: Token!
   total: BigInt!
-  donor: Bytes!
+  donor: Donor!
   dest: Bytes!
   creation_time: Int!
 }
