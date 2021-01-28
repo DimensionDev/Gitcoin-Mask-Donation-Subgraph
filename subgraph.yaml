@@ -1,22 +1,70 @@
-specVersion: 0.0.1
+specVersion: 0.0.2
 schema:
   file: ./schema.graphql
+
 dataSources:
   - kind: ethereum/contract
     name: Splitter
     network: mainnet
     source:
-      address: "0xdf869FAD6dB91f437B59F1EdEFab319493D4C4cE"
+      address: "0xdf869fad6db91f437b59f1edefab319493d4c4ce"
       abi: Splitter
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.2
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
-      entities:
-
       abis:
         - name: Splitter
           file: ./abis/Splitter.json
-      eventHandlers:
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20SymbolBytes
+          file: ./abis/ERC20SymbolBytes.json
+        - name: ERC20NameBytes
+          file: ./abis/ERC20NameBytes.json
 
+      # fix the codegen command
+      entities:
+        - Succeed
+        - Failed
+      callHandlers:
+        - function: splitTransfer(address,address,uint256,uint256,address)
+          handler: handleSplitTransfer
+      file: ./src/mapping.ts
+
+  - kind: ethereum/contract
+    name: BulkCheckout
+    network: mainnet
+    source:
+      address: "0x7d655c57f71464b6f83811c55d84009cd9f5221c"
+      abi: BulkCheckout
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      abis:
+        - name: BulkCheckout
+          file: ./abis/BulkCheckout.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20SymbolBytes
+          file: ./abis/ERC20SymbolBytes.json
+        - name: ERC20NameBytes
+          file: ./abis/ERC20NameBytes.json
+
+      entities:
+        - DonationSent
+        - OwnershipTransferred
+        - Paused
+        - TokenWithdrawn
+        - Unpaused
+
+      callHandlers:
+        - function: donate((address,uint256,address)[])
+          handler: handleDonate
+
+      eventHandlers:
+        - event: DonationSent(indexed address,indexed uint256,address,indexed address)
+          handler: handleDonationSent
+      
       file: ./src/mapping.ts

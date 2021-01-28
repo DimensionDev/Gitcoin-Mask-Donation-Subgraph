@@ -1,3 +1,15 @@
 import { BigInt } from "@graphprotocol/graph-ts"
-import { Splitter } from "../generated/Splitter/Splitter"
-import { ExampleEntity } from "../generated/schema"
+import { Splitter, SplitTransferCall } from "../generated/Splitter/Splitter"
+import { DonateCall, DonationSent } from "../generated/BulkCheckout/BulkCheckout"
+
+function handleSplitTransfer(call: SplitTransferCall): void {
+
+}
+
+function handleDonate(call: DonateCall): void {
+
+}
+
+function handleDonationSent(event: DonationSent): void {
+    
+}

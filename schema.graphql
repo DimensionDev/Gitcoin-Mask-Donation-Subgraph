@@ -1,5 +1,18 @@
-type ExampleEntity @entity {
+type Token @entity {
   id: ID!
-  block: Bytes!
-  transaction: Bytes!
+  type: Int! # 0 - Ether, 1 - ERC20
+  address: Bytes!
+  name: String!
+  symbol: String!
+  decimals: Int!
+  chain_id: Int!
+}
+
+type Donation @entity {
+  id: ID!
+  token: Token!
+  total: BigInt!
+  donor: Bytes!
+  dest: Bytes!
+  creation_time: Int!
 }
