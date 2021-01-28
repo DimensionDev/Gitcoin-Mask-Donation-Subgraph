@@ -1,6 +1,6 @@
 # Mask Donor Gitcoin Subgraph
 
-This subgraph filter out all Mask donors on Gitcoin
+This subgraph filters out all Mask donors on Gitcoin.
 
 ## Setup
 
