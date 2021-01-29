@@ -43,7 +43,36 @@ export function handleSplitTransfer(call: SplitTransferCall): void {
 }
 
 export function handleDonate(call: DonateCall): void {
-    log.info('handle donate', [])
+    let address = Address.fromHexString(MASK_ADDRESS) as Address
+    let _donations = call.inputs._donations
+
+    for (let i = 0; i < _donations.length; i+= 1) {
+        let _donation = _donations[i]
+
+        // not a Mask related donation
+        if (_donation.dest != address) {
+            continue
+        }
+
+        // create token
+        let token = fetchToken(_donation.token)
+        token.save()
+
+        // create donor
+        let donor = new Donor(call.from.toHexString())
+        donor.address = call.from
+        donor.save()
+
+        // create donation
+        let donation = new Donation(call.transaction.hash.toHexString())
+        donation.tx_id = call.transaction.hash.toHexString()
+        donation.token = token.id
+        donation.donor = donor.id
+        donation.dest = address
+        donation.creation_time = call.block.timestamp.toI32()
+        donation.total = _donation.amount
+        donation.save()
+    }
 }
 
 export function handleDonationSent(event: DonationSent): void {
