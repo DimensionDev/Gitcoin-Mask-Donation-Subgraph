@@ -1,4 +1,4 @@
-# Mask Donor Gitcoin Subgraph
+# Mask Gitcoin Donor Subgraph
 
 This subgraph filters out all Mask donors on Gitcoin.
 
