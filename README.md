@@ -18,7 +18,7 @@ Make sure to update package.json settings to point to your own graph account.
 
 | Chain | URL |
 | ----- | ------- |
-| Mainnet | [mask-donor-gitcoin](https://thegraph.com/explorer/subgraph/dimensiondev/mask-donor-gitcoin) |
+| Mainnet | [mask-gitcoin-gitcoin](https://thegraph.com/explorer/subgraph/dimensiondev/mask-gitcoin-donor) |
 | Ropsten | N/A |
 | Rinkeby | N/A |
 | Kovan | N/A |
