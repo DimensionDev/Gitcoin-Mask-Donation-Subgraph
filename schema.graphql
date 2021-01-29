@@ -15,6 +15,7 @@ type Donor @entity {
 
 type Donation @entity {
   id: ID!
+  source_type: Int!
   tx_id: String!
   token: Token!
   total: BigInt!

@@ -6,3 +6,6 @@ export const GITCOIN_ETHER_ADDRESS = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 
 export const TOKEN_TYPE_ETHER = 0;
 export const TOKEN_TYPE_ERC20 = 1;
+
+export const SOURCE_TYPE_SPLITTER = 0;
+export const SOURCE_TYPE_BULK_CHECKOUT = 1;

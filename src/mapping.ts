@@ -2,7 +2,7 @@ import { Address, BigInt, log } from "@graphprotocol/graph-ts"
 import { Splitter, SplitTransferCall } from "../generated/Splitter/Splitter"
 import { DonateCall, DonationSent } from "../generated/BulkCheckout/BulkCheckout"
 import { fetchToken } from "./helpers"
-import { MASK_ADDRESS } from "./constants"
+import { MASK_ADDRESS, SOURCE_TYPE_BULK_CHECKOUT, SOURCE_TYPE_SPLITTER } from "./constants"
 import { Donation, Donor } from "../generated/schema"
 
 export function handleSplitTransfer(call: SplitTransferCall): void {
@@ -24,6 +24,7 @@ export function handleSplitTransfer(call: SplitTransferCall): void {
 
     // create donation 
     let donation = new Donation(call.transaction.hash.toHexString())
+    donation.source_type = SOURCE_TYPE_SPLITTER
     donation.tx_id = call.transaction.hash.toHexString()
     donation.token = token.id
     donation.donor = donor.id
@@ -65,6 +66,7 @@ export function handleDonate(call: DonateCall): void {
 
         // create donation
         let donation = new Donation(call.transaction.hash.toHexString())
+        donation.source_type = SOURCE_TYPE_BULK_CHECKOUT
         donation.tx_id = call.transaction.hash.toHexString()
         donation.token = token.id
         donation.donor = donor.id
