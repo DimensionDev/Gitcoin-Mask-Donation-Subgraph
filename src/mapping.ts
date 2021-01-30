@@ -5,13 +5,13 @@ import { fetchToken } from "./helpers"
 import { MASK_UNKNOWN_PROJECT, MASK_AID_FUND_PORJECT, MASK_NETWORK_PROJECT, PROJECT_TYPE_AID_FUND, PROJECT_TYPE_MASK_NETWORK, SOURCE_TYPE_BULK_CHECKOUT, SOURCE_TYPE_SPLITTER, PROJECT_TYPE_UNKNOWN } from "./constants"
 import { Donation, Donor } from "../generated/schema"
 
-function getProjectType(address: Address): number {
-    if (address.toHexString() == MASK_AID_FUND_PORJECT) return PROJECT_TYPE_AID_FUND
-    if (address.toHexString() == MASK_NETWORK_PROJECT) return PROJECT_TYPE_MASK_NETWORK
+function getProjectType(address: Address): i32 {
+    if (address.toHexString() == MASK_AID_FUND_PORJECT) return PROJECT_TYPE_AID_FUND as i32
+    if (address.toHexString() == MASK_NETWORK_PROJECT) return PROJECT_TYPE_MASK_NETWORK as i32
     return PROJECT_TYPE_UNKNOWN
 }
 
-function getProjectAddress(type: number): Address {
+function getProjectAddress(type: i32): Address {
     if (type == PROJECT_TYPE_AID_FUND) return Address.fromHexString(MASK_AID_FUND_PORJECT) as Address
     if (type == PROJECT_TYPE_MASK_NETWORK) return Address.fromHexString(MASK_NETWORK_PROJECT) as Address
     return Address.fromHexString(MASK_UNKNOWN_PROJECT) as Address
@@ -85,7 +85,7 @@ export function handleDonate(call: DonateCall): void {
         donor.save()
 
         // create donation
-        let donation = new Donation(call.transaction.hash.toHexString())
+        let donation = new Donation(call.transaction.hash.toHexString() + BigInt.fromI32(i).toHexString())
         donation.source_type = SOURCE_TYPE_BULK_CHECKOUT
         donation.project_type = _project
         donation.tx_id = call.transaction.hash.toHexString()
